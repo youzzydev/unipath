@@ -1,3 +1,5 @@
+import type { University } from '@/lib/supabase';
+
 export type DegreeType = 'bachelor' | 'master' | 'phd';
 
 export type ApplicationStatus = 
@@ -73,4 +75,13 @@ export interface CreditPackage {
   credits: number;
   price: number;
   popular?: boolean;
+}
+
+export interface UniversityWithCoords extends University {
+  latitude: number | null;
+  longitude: number | null;
+}
+
+export interface UniversityWithCoordsAndIntelligence extends UniversityWithCoords {
+  intelligence: import('@/data/university-mock').UniversityIntelligence | null;
 }

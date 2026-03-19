@@ -124,3 +124,103 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* Intelligence / Command Center Theme */
+:root {
+  --intelligence-glow: #00D9FF;
+  --intelligence-accent: #00FFD0;
+  --intelligence-target: #00FF88;
+  --intelligence-bg: #0a0f1a;
+  --intelligence-surface: #111827;
+  --intelligence-grid: rgba(0, 217, 255, 0.06);
+  --intelligence-border: rgba(0, 217, 255, 0.15);
+  --intelligence-muted: #64748b;
+  --intelligence-warning: #FFB800;
+  --intelligence-danger: #FF4757;
+  --intelligence-gradient-start: #0a0f1a;
+  --intelligence-gradient-end: #1a1f2e;
+}
+
+.dark {
+  --intelligence-glow: #00D9FF;
+  --intelligence-accent: #00FFD0;
+  --intelligence-target: #00FF88;
+  --intelligence-bg: #050810;
+  --intelligence-surface: #0a0f1a;
+  --intelligence-grid: rgba(0, 217, 255, 0.05);
+  --intelligence-border: rgba(0, 217, 255, 0.1);
+  --intelligence-muted: #94a3b8;
+  --intelligence-warning: #FFB800;
+  --intelligence-danger: #FF4757;
+  --intelligence-gradient-start: #050810;
+  --intelligence-gradient-end: #0a0f1a;
+}
+
+.intelligence-glow {
+  box-shadow: 0 0 20px rgba(0, 217, 255, 0.3);
+}
+
+.intelligence-glow-text {
+  text-shadow: 0 0 10px rgba(0, 217, 255, 0.5);
+}
+
+.intelligence-grid-bg {
+  background-image: 
+    linear-gradient(var(--intelligence-grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--intelligence-grid) 1px, transparent 1px);
+  background-size: 50px 50px;
+}
+
+.intelligence-gradient {
+  background: linear-gradient(135deg, var(--intelligence-gradient-start) 0%, var(--intelligence-gradient-end) 100%);
+}
+
+.intelligence-border-glow {
+  border: 1px solid var(--intelligence-border);
+  box-shadow: 
+    0 0 15px rgba(0, 217, 255, 0.1),
+    inset 0 0 15px rgba(0, 217, 255, 0.05);
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 10px rgba(0, 217, 255, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 25px rgba(0, 217, 255, 0.6);
+  }
+}
+
+@keyframes radar-sweep {
+  0% {
+    transform: rotate(0deg);
+    opacity: 0.5;
+  }
+  100% {
+    transform: rotate(360deg);
+    opacity: 0.5;
+  }
+}
+
+.pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+.scrollbar-intelligence::-webkit-scrollbar {
+  height: 6px;
+  width: 6px;
+}
+
+.scrollbar-intelligence::-webkit-scrollbar-track {
+  background: var(--intelligence-surface);
+  border-radius: 3px;
+}
+
+.scrollbar-intelligence::-webkit-scrollbar-thumb {
+  background: var(--intelligence-border);
+  border-radius: 3px;
+}
+
+.scrollbar-intelligence::-webkit-scrollbar-thumb:hover {
+  background: var(--intelligence-glow);
+}
