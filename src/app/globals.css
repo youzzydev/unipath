@@ -125,20 +125,20 @@
   }
 }
 
-/* Intelligence / Command Center Theme */
+/* Intelligence / Command Center Theme - Light (default for pre-auth) */
 :root {
-  --intelligence-glow: #00D9FF;
-  --intelligence-accent: #00FFD0;
-  --intelligence-target: #00FF88;
-  --intelligence-bg: #0a0f1a;
-  --intelligence-surface: #111827;
-  --intelligence-grid: rgba(0, 217, 255, 0.06);
-  --intelligence-border: rgba(0, 217, 255, 0.15);
+  --intelligence-glow: #0891B2;
+  --intelligence-accent: #059669;
+  --intelligence-target: #10B981;
+  --intelligence-bg: #f8fafc;
+  --intelligence-surface: #ffffff;
+  --intelligence-grid: rgba(8, 145, 178, 0.04);
+  --intelligence-border: rgba(8, 145, 178, 0.15);
   --intelligence-muted: #64748b;
-  --intelligence-warning: #FFB800;
-  --intelligence-danger: #FF4757;
-  --intelligence-gradient-start: #0a0f1a;
-  --intelligence-gradient-end: #1a1f2e;
+  --intelligence-warning: #F59E0B;
+  --intelligence-danger: #EF4444;
+  --intelligence-gradient-start: #f8fafc;
+  --intelligence-gradient-end: #e2e8f0;
 }
 
 .dark {

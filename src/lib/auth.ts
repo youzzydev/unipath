@@ -1,12 +1,20 @@
 import { supabase } from './supabase';
 import { Profile } from './supabase';
 
-export async function signInWithEmail(email: string) {
+export async function sendOtp(email: string) {
   const { data, error } = await supabase.auth.signInWithOtp({
     email,
-    options: {
-      emailRedirectTo: `${process.env.NEXT_PUBLIC_APP_URL}/auth/callback`,
-    },
+  });
+
+  if (error) throw error;
+  return data;
+}
+
+export async function verifyOtp(email: string, token: string) {
+  const { data, error } = await supabase.auth.verifyOtp({
+    type: 'email',
+    email,
+    token,
   });
 
   if (error) throw error;

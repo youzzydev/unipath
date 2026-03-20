@@ -59,7 +59,7 @@ function DashboardContent() {
 
   if (authLoading || (!profileCompleted && user)) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center bg-[var(--intelligence-bg)]">
         <div className="flex flex-col items-center gap-4">
           <div className="relative">
             <Radar className="h-12 w-12 text-[var(--intelligence-glow)] animate-spin" style={{ animationDuration: '3s' }} />
@@ -67,7 +67,7 @@ function DashboardContent() {
               <div className="h-3 w-3 rounded-full bg-[var(--intelligence-glow)]" />
             </div>
           </div>
-          <p className="text-slate-400">Loading intelligence systems...</p>
+          <p className="text-muted-foreground">Loading intelligence systems...</p>
         </div>
       </div>
     );
@@ -79,11 +79,11 @@ function DashboardContent() {
         <div className="mb-6">
           <div className="flex items-center gap-3 mb-2">
             <div className="h-1 w-8 rounded-full bg-[var(--intelligence-glow)]" />
-            <h1 className="text-2xl font-bold text-white">
+            <h1 className="text-2xl font-bold text-foreground">
               University Discovery
             </h1>
           </div>
-          <p className="text-sm text-slate-400 ml-11">
+          <p className="text-sm text-muted-foreground ml-11">
             Select a university to view intelligence analysis and application options
           </p>
         </div>
@@ -115,7 +115,7 @@ function DashboardContent() {
         </div>
 
         <div className="mt-6 p-4 rounded-lg bg-[var(--intelligence-surface)]/50 border border-[var(--intelligence-border)]">
-          <div className="flex items-center gap-4 text-xs text-slate-500">
+          <div className="flex items-center gap-4 text-xs text-muted-foreground">
             <div className="flex items-center gap-2">
               <div className="h-2 w-2 rounded-full bg-[var(--intelligence-glow)]" />
               <span>Data updated daily</span>

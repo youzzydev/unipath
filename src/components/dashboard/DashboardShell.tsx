@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
+import { useTheme } from 'next-themes';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { cn } from '@/lib/utils';
@@ -16,7 +17,9 @@ import {
   Menu, 
   LogOut,
   User,
-  Bell
+  Bell,
+  Sun,
+  Moon
 } from 'lucide-react';
 
 interface DashboardShellProps {
@@ -33,6 +36,7 @@ export function DashboardShell({ children }: DashboardShellProps) {
   const pathname = usePathname();
   const router = useRouter();
   const { profile, loading } = useAuth();
+  const { theme, setTheme } = useTheme();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const handleSignOut = async () => {
@@ -54,7 +58,7 @@ export function DashboardShell({ children }: DashboardShellProps) {
                 <GraduationCap className="h-8 w-8 text-[var(--intelligence-glow)]" />
                 <div className="absolute inset-0 h-8 w-8 pulse-glow rounded-full" />
               </div>
-              <span className="text-xl font-bold tracking-tight text-white">
+              <span className="text-xl font-bold tracking-tight text-foreground">
                 Uni<span className="text-[var(--intelligence-glow)]">Path</span>
               </span>
             </Link>
@@ -73,7 +77,7 @@ export function DashboardShell({ children }: DashboardShellProps) {
                         'gap-2 transition-all duration-200',
                         isActive 
                           ? 'bg-[var(--intelligence-glow)]/10 text-[var(--intelligence-glow)] hover:bg-[var(--intelligence-glow)]/20' 
-                          : 'text-slate-400 hover:text-white hover:bg-white/5'
+                          : 'text-muted-foreground hover:text-foreground hover:bg-[var(--intelligence-glow)]/5'
                       )}
                     >
                       <Icon className="h-4 w-4" />
@@ -89,12 +93,25 @@ export function DashboardShell({ children }: DashboardShellProps) {
             <Button
               variant="ghost"
               size="icon"
-              className="relative text-slate-400 hover:text-white"
+              className="relative text-muted-foreground hover:text-foreground"
             >
               <Bell className="h-5 w-5" />
-              <span className="absolute -top-1 -right-1 h-4 w-4 rounded-full bg-[var(--intelligence-glow)] text-[10px] font-bold text-black flex items-center justify-center">
+              <span className="absolute -top-1 -right-1 h-4 w-4 rounded-full bg-[var(--intelligence-glow)] text-[10px] font-bold flex items-center justify-center">
                 2
               </span>
+            </Button>
+
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+              className="text-muted-foreground hover:text-foreground"
+            >
+              {theme === 'dark' ? (
+                <Sun className="h-5 w-5" />
+              ) : (
+                <Moon className="h-5 w-5" />
+              )}
             </Button>
 
             <div className="hidden sm:flex items-center gap-3">
@@ -103,10 +120,10 @@ export function DashboardShell({ children }: DashboardShellProps) {
                   <User className="h-4 w-4 text-[var(--intelligence-glow)]" />
                 </div>
                 <div className="text-sm">
-                  <p className="font-medium text-white">
+                  <p className="font-medium text-foreground">
                     {loading ? 'Loading...' : profile?.full_name || 'User'}
                   </p>
-                  <p className="text-xs text-slate-500">
+                  <p className="text-xs text-muted-foreground">
                     {profile?.nationality || 'GCC Applicant'}
                   </p>
                 </div>
@@ -115,7 +132,7 @@ export function DashboardShell({ children }: DashboardShellProps) {
 
             <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
               <SheetTrigger asChild>
-                <Button variant="ghost" size="icon" className="md:hidden text-slate-400">
+                <Button variant="ghost" size="icon" className="md:hidden text-muted-foreground">
                   <Menu className="h-5 w-5" />
                 </Button>
               </SheetTrigger>
@@ -126,10 +143,10 @@ export function DashboardShell({ children }: DashboardShellProps) {
                       <User className="h-5 w-5 text-[var(--intelligence-glow)]" />
                     </div>
                     <div>
-                      <p className="font-medium text-white">
+                      <p className="font-medium text-foreground">
                         {profile?.full_name || 'User'}
                       </p>
-                      <p className="text-sm text-slate-500">
+                      <p className="text-sm text-muted-foreground">
                         {profile?.nationality || 'GCC Applicant'}
                       </p>
                     </div>
@@ -151,8 +168,8 @@ export function DashboardShell({ children }: DashboardShellProps) {
                             className={cn(
                               'w-full justify-start gap-3',
                               isActive 
-                                ? 'bg-[var(--intelligence-glow)]/10 text-[varelligence-glow)]' 
-                                : 'text-slate-400'
+                                ? 'bg-[var(--intelligence-glow)]/10 text-[var(--intelligence-glow)]' 
+                                : 'text-muted-foreground'
                             )}
                           >
                             <Icon className="h-5 w-5" />
@@ -166,7 +183,7 @@ export function DashboardShell({ children }: DashboardShellProps) {
                   <div className="mt-auto">
                     <Button
                       variant="ghost"
-                      className="w-full justify-start gap-3 text-red-400 hover:text-red-300 hover:bg-red-400/10"
+                      className="w-full justify-start gap-3 text-[var(--intelligence-danger)] hover:text-[var(--intelligence-danger)]/80 hover:bg-[var(--intelligence-danger)]/10"
                       onClick={handleSignOut}
                     >
                       <LogOut className="h-5 w-5" />
