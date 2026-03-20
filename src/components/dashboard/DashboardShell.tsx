@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { useTheme } from 'next-themes';
@@ -38,6 +38,12 @@ export function DashboardShell({ children }: DashboardShellProps) {
   const { profile, loading } = useAuth();
   const { theme, setTheme } = useTheme();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setMounted(true);
+  }, []);
 
   const handleSignOut = async () => {
     try {
@@ -107,8 +113,12 @@ export function DashboardShell({ children }: DashboardShellProps) {
               onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
               className="text-muted-foreground hover:text-foreground"
             >
-              {theme === 'dark' ? (
-                <Sun className="h-5 w-5" />
+              {mounted ? (
+                theme === 'dark' ? (
+                  <Sun className="h-5 w-5" />
+                ) : (
+                  <Moon className="h-5 w-5" />
+                )
               ) : (
                 <Moon className="h-5 w-5" />
               )}
