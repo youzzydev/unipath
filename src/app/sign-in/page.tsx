@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
-import { sendOtp, verifyOtp } from '@/lib/auth';
+import { sendOtpAction, verifyOtpAction } from '@/app/actions/auth';
 import { supabase } from '@/lib/supabase';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -34,7 +34,7 @@ export default function SignInPage() {
     setError(null);
 
     try {
-      await sendOtp(email);
+      await sendOtpAction(email);
       setStep('otp');
       setResendCooldown(60);
       setTimeout(() => inputRefs.current[0]?.focus(), 100);
@@ -59,13 +59,13 @@ export default function SignInPage() {
     setError(null);
 
     try {
-      const data = await verifyOtp(email, token);
+      const data = await verifyOtpAction(email, token);
       
-      if (data.user) {
+      if (data.session?.user) {
         const { data: profile } = await supabase
           .from('profiles')
           .select('profile_completed')
-          .eq('id', data.user.id)
+          .eq('id', data.session.user.id)
           .single();
 
         const profileCompleted = profile?.profile_completed ?? false;
@@ -97,7 +97,7 @@ export default function SignInPage() {
     setOtp(['', '', '', '', '', '']);
 
     try {
-      await sendOtp(email);
+      await sendOtpAction(email);
       setResendCooldown(60);
     } catch (err: unknown) {
       console.error('Resend OTP error:', err);
@@ -139,21 +139,20 @@ export default function SignInPage() {
     const pastedData = e.clipboardData.getData('text').replace(/\D/g, '').slice(0, 6);
     
     if (pastedData) {
-      const newOtp = [...otp];
-      pastedData.split('').forEach((char, i) => {
-        if (i < 6) newOtp[i] = char;
-      });
+      const newOtp = Array(6).fill('').map((_, i) => pastedData[i] || '');
       setOtp(newOtp);
       
       const lastFilledIndex = Math.min(pastedData.length - 1, 5);
       inputRefs.current[lastFilledIndex]?.focus();
       
-      if (newOtp.join('').length === 6) {
-        const form = inputRefs.current[0]?.closest('form');
-        if (form) {
-          const submitEvent = new Event('submit', { bubbles: true, cancelable: true });
-          form.dispatchEvent(submitEvent);
-        }
+      if (pastedData.length === 6) {
+        setTimeout(() => {
+          const form = inputRefs.current[0]?.closest('form');
+          if (form) {
+            const submitEvent = new Event('submit', { bubbles: true, cancelable: true });
+            form.dispatchEvent(submitEvent);
+          }
+        }, 0);
       }
     }
   }
