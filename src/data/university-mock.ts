@@ -1,5 +1,4 @@
 export interface UniversityIntelligence {
-  universityId: string;
   fitScore: number;
   fitBreakdown: {
     academic: number;
@@ -20,7 +19,6 @@ export interface UniversityIntelligence {
 
 export const universityIntelligenceData: Record<string, UniversityIntelligence> = {
   'university-of-oxford': {
-    universityId: 'a1b2c3d4-0001-0001-0001-000000000001',
     fitScore: 95,
     fitBreakdown: { academic: 100, budget: 60, location: 85, career: 98, lifestyle: 82 },
     tags: ['Russell Group', 'World Top 10', 'Strong for Medicine', 'Strong for Humanities', 'Historic Excellence'],
@@ -33,7 +31,6 @@ export const universityIntelligenceData: Record<string, UniversityIntelligence> 
     heroImageUrl: 'https://images.unsplash.com/photo-1580537659466-0a9bfa916a54?w=800&q=80',
   },
   'university-of-cambridge': {
-    universityId: 'a1b2c3d4-0002-0001-0001-000000000002',
     fitScore: 94,
     fitBreakdown: { academic: 100, budget: 62, location: 88, career: 97, lifestyle: 80 },
     tags: ['Russell Group', 'World Top 10', 'Strong for Sciences', 'Strong for Engineering', 'Historic Excellence'],
@@ -46,7 +43,6 @@ export const universityIntelligenceData: Record<string, UniversityIntelligence> 
     heroImageUrl: 'https://images.unsplash.com/photo-1580175483124-8c6d2f9d2a1a?w=800&q=80',
   },
   'imperial-college-london': {
-    universityId: 'a1b2c3d4-0003-0001-0001-000000000003',
     fitScore: 92,
     fitBreakdown: { academic: 98, budget: 65, location: 82, career: 99, lifestyle: 75 },
     tags: ['Russell Group', 'Strong for Engineering', 'Strong for Medicine', 'Strong for Business', 'Tech Hub'],
@@ -59,7 +55,6 @@ export const universityIntelligenceData: Record<string, UniversityIntelligence> 
     heroImageUrl: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&q=80',
   },
   'university-college-london': {
-    universityId: 'a1b2c3d4-0004-0001-0001-000000000004',
     fitScore: 91,
     fitBreakdown: { academic: 96, budget: 70, location: 88, career: 94, lifestyle: 85 },
     tags: ['Russell Group', 'Diverse Programs', 'Strong Research', 'London Location', 'Good International Support'],
@@ -72,7 +67,6 @@ export const universityIntelligenceData: Record<string, UniversityIntelligence> 
     heroImageUrl: 'https://images.unsplash.com/photo-1515542622106-78bda8ba0e5b?w=800&q=80',
   },
   'university-of-edinburgh': {
-    universityId: 'a1b2c3d4-0005-0001-0001-000000000005',
     fitScore: 88,
     fitBreakdown: { academic: 95, budget: 75, location: 80, career: 92, lifestyle: 88 },
     tags: ['Russell Group', 'Strong for AI', 'Strong for Medicine', 'Historic Excellence', 'Good Scholarship Options'],
@@ -85,7 +79,6 @@ export const universityIntelligenceData: Record<string, UniversityIntelligence> 
     heroImageUrl: 'https://images.unsplash.com/photo-1564519870-a2fc4d39b4ab?w=800&q=80',
   },
   'university-of-manchester': {
-    universityId: 'a1b2c3d4-0006-0001-0001-000000000006',
     fitScore: 86,
     fitBreakdown: { academic: 92, budget: 82, location: 78, career: 90, lifestyle: 84 },
     tags: ['Russell Group', 'Strong for Engineering', 'Strong for Business', 'Budget Friendly Russell Group', 'Large Campus'],
@@ -98,7 +91,6 @@ export const universityIntelligenceData: Record<string, UniversityIntelligence> 
     heroImageUrl: 'https://images.unsplash.com/photo-1580852300634-0f6c2射7b31c?w=800&q=80',
   },
   'kings-college-london': {
-    universityId: 'a1b2c3d4-0007-0001-0001-000000000007',
     fitScore: 85,
     fitBreakdown: { academic: 91, budget: 68, location: 88, career: 93, lifestyle: 78 },
     tags: ['Russell Group', 'Strong for Medicine', 'Strong for Law', 'London Location', 'Historic Reputation'],
@@ -111,7 +103,6 @@ export const universityIntelligenceData: Record<string, UniversityIntelligence> 
     heroImageUrl: 'https://images.unsplash.com/photo-1551836022-deb4988cc6c0?w=800&q=80',
   },
   'university-of-bristol': {
-    universityId: 'a1b2c3d4-0008-0001-0001-000000000008',
     fitScore: 84,
     fitBreakdown: { academic: 90, budget: 76, location: 82, career: 88, lifestyle: 86 },
     tags: ['Russell Group', 'Strong for Engineering', 'Strong for Social Sciences', 'Good City Life', 'Research Intensive'],
@@ -124,7 +115,6 @@ export const universityIntelligenceData: Record<string, UniversityIntelligence> 
     heroImageUrl: 'https://images.unsplash.com/photo-1529528744093-6f8abeee511d?w=800&q=80',
   },
   'university-of-warwick': {
-    universityId: 'a1b2c3d4-0009-0001-0001-000000000009',
     fitScore: 83,
     fitBreakdown: { academic: 89, budget: 80, location: 72, career: 92, lifestyle: 82 },
     tags: ['Russell Group', 'Strong for Business', 'Strong for Engineering', 'Industry Links', 'Modern Campus'],
@@ -137,7 +127,6 @@ export const universityIntelligenceData: Record<string, UniversityIntelligence> 
     heroImageUrl: 'https://images.unsplash.com/photo-1562774053-701939374585?w=800&q=80',
   },
   'university-of-glasgow': {
-    universityId: 'a1b2c3d4-0010-0001-0001-000000000010',
     fitScore: 82,
     fitBreakdown: { academic: 90, budget: 78, location: 76, career: 86, lifestyle: 85 },
     tags: ['Russell Group', 'Historic Excellence', 'Strong for Law', 'Strong for Engineering', 'Good Value Scotland'],
@@ -150,7 +139,6 @@ export const universityIntelligenceData: Record<string, UniversityIntelligence> 
     heroImageUrl: 'https://images.unsplash.com/photo-1519817650390-64a93db51149?w=800&q=80',
   },
   'university-of-birmingham': {
-    universityId: 'a1b2c3d4-0011-0001-0001-000000000011',
     fitScore: 81,
     fitBreakdown: { academic: 88, budget: 79, location: 75, career: 87, lifestyle: 83 },
     tags: ['Russell Group', 'Strong for Business', 'Strong for Engineering', 'Russell Group Value', 'Diverse City'],
@@ -163,7 +151,6 @@ export const universityIntelligenceData: Record<string, UniversityIntelligence> 
     heroImageUrl: 'https://images.unsplash.com/photo-1584269600464-37b1b58a9fe1?w=800&q=80',
   },
   'university-of-sheffield': {
-    universityId: 'a1b2c3d4-0012-0001-0001-000000000012',
     fitScore: 80,
     fitBreakdown: { academic: 87, budget: 84, location: 74, career: 85, lifestyle: 80 },
     tags: ['Russell Group', 'Strong for Engineering', 'Strong for Medicine', 'Budget Friendly', 'Student Friendly City'],
@@ -176,7 +163,6 @@ export const universityIntelligenceData: Record<string, UniversityIntelligence> 
     heroImageUrl: 'https://images.unsplash.com/photo-1580477371194-65e68a3b7467?w=800&q=80',
   },
   'university-of-liverpool': {
-    universityId: 'a1b2c3d4-0013-0001-0001-000000000013',
     fitScore: 78,
     fitBreakdown: { academic: 85, budget: 86, location: 72, career: 83, lifestyle: 78 },
     tags: ['Russell Group', 'Strong for Medicine', 'Strong for Engineering', 'Very Budget Friendly', 'Vibrant City'],
@@ -189,7 +175,6 @@ export const universityIntelligenceData: Record<string, UniversityIntelligence> 
     heroImageUrl: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80',
   },
   'university-of-leeds': {
-    universityId: 'a1b2c3d4-0014-0001-0001-000000000014',
     fitScore: 79,
     fitBreakdown: { academic: 86, budget: 81, location: 76, career: 84, lifestyle: 82 },
     tags: ['Russell Group', 'Strong for Business', 'Strong for Arts', 'Large Campus', 'Vibrant Student Life'],
@@ -202,7 +187,6 @@ export const universityIntelligenceData: Record<string, UniversityIntelligence> 
     heroImageUrl: 'https://images.unsplash.com/photo-1606761568499-6d2451b23c66?w=800&q=80',
   },
   'university-of-nottingham': {
-    universityId: 'a1b2c3d4-0015-0001-0001-000000000015',
     fitScore: 77,
     fitBreakdown: { academic: 85, budget: 82, location: 72, career: 83, lifestyle: 78 },
     tags: ['Russell Group', 'Beautiful Campus', 'Strong Research', 'Good Support', 'Global Reputation'],
@@ -215,7 +199,6 @@ export const universityIntelligenceData: Record<string, UniversityIntelligence> 
     heroImageUrl: 'https://images.unsplash.com/photo-1580537659466-0a9bfa916a54?w=800&q=80',
   },
   'university-of-southampton': {
-    universityId: 'a1b2c3d4-0016-0001-0001-000000000016',
     fitScore: 76,
     fitBreakdown: { academic: 87, budget: 78, location: 70, career: 84, lifestyle: 76 },
     tags: ['Russell Group', 'Strong for Engineering', 'Strong for Maritime Studies', 'Coastal Location', 'Research Led'],
@@ -228,7 +211,6 @@ export const universityIntelligenceData: Record<string, UniversityIntelligence> 
     heroImageUrl: 'https://images.unsplash.com/photo-1569437061241-a848be43cc82?w=800&q=80',
   },
   'university-of-exeter': {
-    universityId: 'a1b2c3d4-0017-0001-0001-000000000017',
     fitScore: 74,
     fitBreakdown: { academic: 84, budget: 80, location: 74, career: 80, lifestyle: 85 },
     tags: ['Russell Group', 'Good Student Experience', 'Beautiful Campus', 'Strong Support', 'Safe City'],
@@ -241,7 +223,6 @@ export const universityIntelligenceData: Record<string, UniversityIntelligence> 
     heroImageUrl: 'https://images.unsplash.com/photo-1562774053-701939374585?w=800&q=80',
   },
   'queen-mary-university-of-london': {
-    universityId: 'a1b2c3d4-0018-0001-0001-000000000018',
     fitScore: 73,
     fitBreakdown: { academic: 83, budget: 75, location: 82, career: 82, lifestyle: 78 },
     tags: ['Russell Group', 'London Location', 'Strong for Law', 'Strong for Medicine', 'Diverse Community'],
@@ -254,7 +235,6 @@ export const universityIntelligenceData: Record<string, UniversityIntelligence> 
     heroImageUrl: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&q=80',
   },
   'university-of-durham': {
-    universityId: 'a1b2c3d4-0019-0001-0001-000000000019',
     fitScore: 81,
     fitBreakdown: { academic: 91, budget: 72, location: 76, career: 88, lifestyle: 84 },
     tags: ['Russell Group', 'Historic Excellence', 'Collegiate System', 'Strong for Humanities', 'Prestigious'],
@@ -267,7 +247,6 @@ export const universityIntelligenceData: Record<string, UniversityIntelligence> 
     heroImageUrl: 'https://images.unsplash.com/photo-1585032226651-759b368d7246?w=800&q=80',
   },
   'university-of-york': {
-    universityId: 'a1b2c3d4-0020-0001-0001-000000000020',
     fitScore: 75,
     fitBreakdown: { academic: 86, budget: 82, location: 74, career: 82, lifestyle: 84 },
     tags: ['Russell Group', 'Beautiful Campus', 'Strong Research', 'Historic City', 'Good Support'],
@@ -280,7 +259,6 @@ export const universityIntelligenceData: Record<string, UniversityIntelligence> 
     heroImageUrl: 'https://images.unsplash.com/photo-1515523110800-9415d13b84a8?w=800&q=80',
   },
   'university-of-aberdeen': {
-    universityId: 'a1b2c3d4-0021-0001-0001-000000000021',
     fitScore: 72,
     fitBreakdown: { academic: 84, budget: 85, location: 65, career: 80, lifestyle: 78 },
     tags: ['Russell Group', 'Strong for Energy', 'Strong for Medicine', 'Budget Friendly', 'Historic'],
@@ -293,7 +271,6 @@ export const universityIntelligenceData: Record<string, UniversityIntelligence> 
     heroImageUrl: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&q=80',
   },
   'university-of-st-andrews': {
-    universityId: 'a1b2c3d4-0022-0001-0001-000000000022',
     fitScore: 80,
     fitBreakdown: { academic: 93, budget: 68, location: 72, career: 86, lifestyle: 88 },
     tags: ['Russell Group', 'Historic Excellence', 'Strong for Sciences', 'Small Town', 'Prestigious'],
@@ -306,7 +283,6 @@ export const universityIntelligenceData: Record<string, UniversityIntelligence> 
     heroImageUrl: 'https://images.unsplash.com/photo-1562774053-701939374585?w=800&q=80',
   },
   'cardiff-university': {
-    universityId: 'a1b2c3d4-0023-0001-0001-000000000023',
     fitScore: 74,
     fitBreakdown: { academic: 84, budget: 86, location: 70, career: 80, lifestyle: 82 },
     tags: ['Russell Group', 'Capital City', 'Strong for Medicine', 'Strong for Journalism', 'Budget Friendly'],
@@ -319,7 +295,6 @@ export const universityIntelligenceData: Record<string, UniversityIntelligence> 
     heroImageUrl: 'https://images.unsplash.com/photo-1513326738677-b964603b136d?w=800&q=80',
   },
   'queens-university-belfast': {
-    universityId: 'a1b2c3d4-0024-0001-0001-000000000024',
     fitScore: 71,
     fitBreakdown: { academic: 82, budget: 90, location: 62, career: 78, lifestyle: 80 },
     tags: ['Russell Group', 'Most Budget Friendly Russell Group', 'Historic', 'Capital of Northern Ireland', 'Safe City'],
@@ -332,7 +307,6 @@ export const universityIntelligenceData: Record<string, UniversityIntelligence> 
     heroImageUrl: 'https://images.unsplash.com/photo-1498243691581-b145c3f54a5a?w=800&q=80',
   },
   'university-of-bath': {
-    universityId: 'a1b2c3d4-0025-0001-0001-000000000025',
     fitScore: 78,
     fitBreakdown: { academic: 87, budget: 72, location: 78, career: 90, lifestyle: 86 },
     tags: ['Strong for Business', 'Strong for Engineering', 'Beautiful City', 'High Employability', 'Good Sports Facilities'],
@@ -345,7 +319,6 @@ export const universityIntelligenceData: Record<string, UniversityIntelligence> 
     heroImageUrl: 'https://images.unsplash.com/photo-1590123292089-27e8de3e8b0c?w=800&q=80',
   },
   'university-of-lancaster': {
-    universityId: 'a1b2c3d4-0026-0001-0001-000000000026',
     fitScore: 75,
     fitBreakdown: { academic: 84, budget: 80, location: 72, career: 82, lifestyle: 86 },
     tags: ['Collegiate System', 'Strong for Business', 'Beautiful Campus', 'Good Student Experience', 'Safe Campus'],
@@ -358,7 +331,6 @@ export const universityIntelligenceData: Record<string, UniversityIntelligence> 
     heroImageUrl: 'https://images.unsplash.com/photo-1562774053-701939374585?w=800&q=80',
   },
   'university-of-east-anglia': {
-    universityId: 'a1b2c3d4-0027-0001-0001-000000000027',
     fitScore: 70,
     fitBreakdown: { academic: 82, budget: 84, location: 70, career: 78, lifestyle: 80 },
     tags: ['Strong for Creative Writing', 'Strong for Sciences', 'Modern Campus', 'Good Value', 'Near Norwich'],
@@ -371,7 +343,6 @@ export const universityIntelligenceData: Record<string, UniversityIntelligence> 
     heroImageUrl: 'https://images.unsplash.com/photo-1562774053-701939374585?w=800&q=80',
   },
   'university-of-leicester': {
-    universityId: 'a1b2c3d4-0028-0001-0001-000000000028',
     fitScore: 68,
     fitBreakdown: { academic: 80, budget: 85, location: 68, career: 76, lifestyle: 78 },
     tags: ['Strong for Sciences', 'Strong for Law', 'Diverse City', 'Budget Friendly', 'Research Led'],
@@ -384,7 +355,6 @@ export const universityIntelligenceData: Record<string, UniversityIntelligence> 
     heroImageUrl: 'https://images.unsplash.com/photo-1580477371194-65e68a3b7467?w=800&q=80',
   },
   'sheffield-hallam-university': {
-    universityId: 'a1b2c3d4-0029-0001-0001-000000000029',
     fitScore: 65,
     fitBreakdown: { academic: 72, budget: 92, location: 70, career: 78, lifestyle: 76 },
     tags: ['Budget Friendly', 'Strong for Arts', 'Strong for Sports', 'Industry Links', 'Modern Facilities'],
@@ -397,7 +367,6 @@ export const universityIntelligenceData: Record<string, UniversityIntelligence> 
     heroImageUrl: 'https://images.unsplash.com/photo-1580477371194-65e68a3b7467?w=800&q=80',
   },
   'university-of-brighton': {
-    universityId: 'a1b2c3d4-0030-0001-0001-000000000030',
     fitScore: 64,
     fitBreakdown: { academic: 74, budget: 78, location: 82, career: 74, lifestyle: 86 },
     tags: ['Coastal Location', 'Creative Arts', 'Diverse Programs', 'Vibrant City', 'Good Student Life'],
@@ -410,7 +379,6 @@ export const universityIntelligenceData: Record<string, UniversityIntelligence> 
     heroImageUrl: 'https://images.unsplash.com/photo-1555680202-c86f0e12f086?w=800&q=80',
   },
   'university-of-sussex': {
-    universityId: 'a1b2c3d4-0031-0001-0001-000000000031',
     fitScore: 66,
     fitBreakdown: { academic: 78, budget: 80, location: 76, career: 74, lifestyle: 84 },
     tags: ['Strong for Social Sciences', 'Beautiful Campus', 'Research Led', 'Near Brighton', 'Good Arts'],
@@ -423,7 +391,6 @@ export const universityIntelligenceData: Record<string, UniversityIntelligence> 
     heroImageUrl: 'https://images.unsplash.com/photo-1562774053-701939374585?w=800&q=80',
   },
   'university-of-strathclyde': {
-    universityId: 'a1b2c3d4-0032-0001-0001-000000000032',
     fitScore: 73,
     fitBreakdown: { academic: 83, budget: 82, location: 76, career: 86, lifestyle: 78 },
     tags: ['Strong for Engineering', 'Strong for Business', 'Glasgow Location', 'Industry Focused', 'Technical'],
@@ -436,7 +403,6 @@ export const universityIntelligenceData: Record<string, UniversityIntelligence> 
     heroImageUrl: 'https://images.unsplash.com/photo-1519817650390-64a93db51149?w=800&q=80',
   },
   'university-of-surrey': {
-    universityId: 'a1b2c3d4-0033-0001-0001-000000000033',
     fitScore: 72,
     fitBreakdown: { academic: 80, budget: 74, location: 74, career: 84, lifestyle: 82 },
     tags: ['High Student Satisfaction', 'Strong for Business', 'Near London', 'Good Facilities', 'Employability Focus'],
@@ -449,7 +415,6 @@ export const universityIntelligenceData: Record<string, UniversityIntelligence> 
     heroImageUrl: 'https://images.unsplash.com/photo-1562774053-701939374585?w=800&q=80',
   },
   'university-of-portsmouth': {
-    universityId: 'a1b2c3d4-0034-0001-0001-000000000034',
     fitScore: 63,
     fitBreakdown: { academic: 74, budget: 86, location: 74, career: 74, lifestyle: 80 },
     tags: ['Budget Friendly', 'Coastal Location', 'Modern Facilities', 'Good Support', 'Naval Heritage'],
@@ -462,7 +427,6 @@ export const universityIntelligenceData: Record<string, UniversityIntelligence> 
     heroImageUrl: 'https://images.unsplash.com/photo-1569437061241-a848be43cc82?w=800&q=80',
   },
   'university-of-reading': {
-    universityId: 'a1b2c3d4-0035-0001-0001-000000000035',
     fitScore: 67,
     fitBreakdown: { academic: 78, budget: 82, location: 68, career: 76, lifestyle: 76 },
     tags: ['Strong for Business', 'Historic Campus', 'Good Research', 'Near London', 'Agricultural Heritage'],
@@ -475,7 +439,6 @@ export const universityIntelligenceData: Record<string, UniversityIntelligence> 
     heroImageUrl: 'https://images.unsplash.com/photo-1562774053-701939374585?w=800&q=80',
   },
   'loughborough-university': {
-    universityId: 'a1b2c3d4-0036-0001-0001-000000000036',
     fitScore: 71,
     fitBreakdown: { academic: 80, budget: 78, location: 64, career: 84, lifestyle: 80 },
     tags: ['Strong for Sports', 'Strong for Engineering', 'Excellent Facilities', 'Campus Based', 'Industry Links'],
@@ -488,7 +451,6 @@ export const universityIntelligenceData: Record<string, UniversityIntelligence> 
     heroImageUrl: 'https://images.unsplash.com/photo-1562774053-701939374585?w=800&q=80',
   },
   'university-of-lincoln': {
-    universityId: 'a1b2c3d4-0037-0001-0001-000000000037',
     fitScore: 62,
     fitBreakdown: { academic: 74, budget: 88, location: 68, career: 72, lifestyle: 80 },
     tags: ['Modern Campus', 'Budget Friendly', 'Industry Focus', 'Historic City', 'Good Support'],
@@ -501,7 +463,6 @@ export const universityIntelligenceData: Record<string, UniversityIntelligence> 
     heroImageUrl: 'https://images.unsplash.com/photo-1585032226651-759b368d7246?w=800&q=80',
   },
   'university-of-kent': {
-    universityId: 'a1b2c3d4-0038-0001-0001-000000000038',
     fitScore: 68,
     fitBreakdown: { academic: 78, budget: 80, location: 72, career: 76, lifestyle: 82 },
     tags: ['European Connections', 'Beautiful Campus', 'Strong for Law', 'Near Canterbury', 'Research Led'],
@@ -514,7 +475,6 @@ export const universityIntelligenceData: Record<string, UniversityIntelligence> 
     heroImageUrl: 'https://images.unsplash.com/photo-1515523110800-9415d13b84a8?w=800&q=80',
   },
   'university-of-dundee': {
-    universityId: 'a1b2c3d4-0039-0001-0001-000000000039',
     fitScore: 69,
     fitBreakdown: { academic: 80, budget: 86, location: 66, career: 76, lifestyle: 78 },
     tags: ['Strong for Medicine', 'Strong for Life Sciences', 'Budget Friendly', 'Research Led', 'Historic'],
@@ -527,7 +487,6 @@ export const universityIntelligenceData: Record<string, UniversityIntelligence> 
     heroImageUrl: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&q=80',
   },
   'university-of-stirling': {
-    universityId: 'a1b2c3d4-0040-0001-0001-000000000040',
     fitScore: 66,
     fitBreakdown: { academic: 76, budget: 84, location: 68, career: 74, lifestyle: 86 },
     tags: ['Beautiful Campus', 'Strong for Sports', 'Strong for Media', 'Safe Environment', 'Scenic Location'],
@@ -540,7 +499,6 @@ export const universityIntelligenceData: Record<string, UniversityIntelligence> 
     heroImageUrl: 'https://images.unsplash.com/photo-1562774053-701939374585?w=800&q=80',
   },
   'university-of-the-west-of-england': {
-    universityId: 'a1b2c3d4-0041-0001-0001-000000000041',
     fitScore: 61,
     fitBreakdown: { academic: 72, budget: 90, location: 72, career: 74, lifestyle: 78 },
     tags: ['Budget Friendly', 'Practical Focus', 'Modern Facilities', 'Near Bristol', 'Industry Links'],
@@ -553,7 +511,6 @@ export const universityIntelligenceData: Record<string, UniversityIntelligence> 
     heroImageUrl: 'https://images.unsplash.com/photo-1529528744093-6f8abeee511d?w=800&q=80',
   },
   'coventry-university': {
-    universityId: 'a1b2c3d4-0042-0001-0001-000000000042',
     fitScore: 62,
     fitBreakdown: { academic: 74, budget: 92, location: 68, career: 76, lifestyle: 74 },
     tags: ['Most Budget Friendly', 'High Employability', 'Modern Campus', 'Central Location', 'Industry Focused'],
@@ -566,7 +523,6 @@ export const universityIntelligenceData: Record<string, UniversityIntelligence> 
     heroImageUrl: 'https://images.unsplash.com/photo-1562774053-701939374585?w=800&q=80',
   },
   'university-of-huddersfield': {
-    universityId: 'a1b2c3d4-0043-0001-0001-000000000043',
     fitScore: 60,
     fitBreakdown: { academic: 72, budget: 92, location: 64, career: 74, lifestyle: 74 },
     tags: ['Budget Friendly', 'High Teaching Quality', 'Modern Facilities', 'Good Support', 'Industry Links'],
@@ -579,7 +535,6 @@ export const universityIntelligenceData: Record<string, UniversityIntelligence> 
     heroImageUrl: 'https://images.unsplash.com/photo-1562774053-701939374585?w=800&q=80',
   },
   'university-of-salford': {
-    universityId: 'a1b2c3d4-0044-0001-0001-000000000044',
     fitScore: 58,
     fitBreakdown: { academic: 70, budget: 90, location: 72, career: 72, lifestyle: 76 },
     tags: ['Budget Friendly', 'Strong for Media', 'Near Manchester', 'Industry Links', 'Modern Campus'],
@@ -592,7 +547,6 @@ export const universityIntelligenceData: Record<string, UniversityIntelligence> 
     heroImageUrl: 'https://images.unsplash.com/photo-1580477371194-65e68a3b7467?w=800&q=80',
   },
   'university-of-wolverhampton': {
-    universityId: 'a1b2c3d4-0045-0001-0001-000000000045',
     fitScore: 55,
     fitBreakdown: { academic: 68, budget: 95, location: 62, career: 70, lifestyle: 72 },
     tags: ['Most Budget Friendly', 'Diverse Community', 'Multiple Campuses', 'Good Support', 'Accessible'],
@@ -605,7 +559,6 @@ export const universityIntelligenceData: Record<string, UniversityIntelligence> 
     heroImageUrl: 'https://images.unsplash.com/photo-1562774053-701939374585?w=800&q=80',
   },
   'university-of-westminster': {
-    universityId: 'a1b2c3d4-0046-0001-0001-000000000046',
     fitScore: 64,
     fitBreakdown: { academic: 74, budget: 70, location: 90, career: 78, lifestyle: 80 },
     tags: ['Central London', 'Career Focused', 'Diverse Programs', 'Good Facilities', 'Industry Links'],
@@ -618,7 +571,6 @@ export const universityIntelligenceData: Record<string, UniversityIntelligence> 
     heroImageUrl: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&q=80',
   },
   'kingston-university': {
-    universityId: 'a1b2c3d4-0047-0001-0001-000000000047',
     fitScore: 60,
     fitBreakdown: { academic: 72, budget: 76, location: 78, career: 74, lifestyle: 80 },
     tags: ['Near London', 'Strong for Creative Arts', 'Diverse Community', 'Good Support', 'Modern Facilities'],
@@ -631,7 +583,6 @@ export const universityIntelligenceData: Record<string, UniversityIntelligence> 
     heroImageUrl: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&q=80',
   },
   'university-of-essex': {
-    universityId: 'a1b2c3d4-0048-0001-0001-000000000048',
     fitScore: 65,
     fitBreakdown: { academic: 76, budget: 84, location: 66, career: 74, lifestyle: 78 },
     tags: ['Strong for Social Sciences', 'Research Led', 'Diverse Community', 'Modern Campus', 'Good Value'],
@@ -644,7 +595,6 @@ export const universityIntelligenceData: Record<string, UniversityIntelligence> 
     heroImageUrl: 'https://images.unsplash.com/photo-1562774053-701939374585?w=800&q=80',
   },
   'university-of-plymouth': {
-    universityId: 'a1b2c3d4-0049-0001-0001-000000000049',
     fitScore: 58,
     fitBreakdown: { academic: 72, budget: 88, location: 70, career: 70, lifestyle: 82 },
     tags: ['Coastal Location', 'Strong for Marine Studies', 'Budget Friendly', 'Good Student Life', 'Research Led'],
@@ -657,7 +607,6 @@ export const universityIntelligenceData: Record<string, UniversityIntelligence> 
     heroImageUrl: 'https://images.unsplash.com/photo-1569437061241-a848be43cc82?w=800&q=80',
   },
   'newcastle-university': {
-    universityId: 'a1b2c3d4-0050-0001-0001-000000000050',
     fitScore: 76,
     fitBreakdown: { academic: 84, budget: 80, location: 74, career: 82, lifestyle: 84 },
     tags: ['Strong for Medicine', 'Strong for Engineering', 'Vibrant City', 'Historic Campus', 'Good Student Life'],

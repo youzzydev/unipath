@@ -77,11 +77,25 @@ export interface CreditPackage {
   popular?: boolean;
 }
 
-export interface UniversityWithCoords extends University {
-  latitude: number | null;
-  longitude: number | null;
+export interface UniversityIntelligence {
+  fitScore: number;
+  fitBreakdown: {
+    academic: number;
+    budget: number;
+    location: number;
+    career: number;
+    lifestyle: number;
+  };
+  tags: string[];
+  rationale: string;
+  tuitionBand: 1 | 2 | 3 | 4;
+  livingCostBand: 1 | 2 | 3 | 4;
+  employabilityScore: number;
+  internationalSupportScore: number;
+  scholarshipSignal: 'high' | 'medium' | 'low' | 'none';
+  heroImageUrl: string | null;
 }
 
-export interface UniversityWithCoordsAndIntelligence extends UniversityWithCoords {
-  intelligence: import('@/data/university-mock').UniversityIntelligence | null;
-}
+export type UniversityWithCoordsAndIntelligence = University & {
+  intelligence: UniversityIntelligence | null;
+};

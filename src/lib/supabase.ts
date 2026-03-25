@@ -81,6 +81,24 @@ export type Database = {
           website: string | null;
           is_russell_group: boolean | null;
           created_at: string;
+          latitude: number | null;
+          longitude: number | null;
+          fit_score: number | null;
+          fit_breakdown: {
+            academic: number;
+            budget: number;
+            location: number;
+            career: number;
+            lifestyle: number;
+          } | null;
+          tags: string[] | null;
+          rationale: string | null;
+          tuition_band: number | null;
+          living_cost_band: number | null;
+          employability_score: number | null;
+          international_support_score: number | null;
+          scholarship_signal: 'high' | 'medium' | 'low' | 'none' | null;
+          hero_image_url: string | null;
         };
         Insert: {
           id?: string;
@@ -95,6 +113,24 @@ export type Database = {
           website?: string | null;
           is_russell_group?: boolean | null;
           created_at?: string;
+          latitude?: number | null;
+          longitude?: number | null;
+          fit_score?: number | null;
+          fit_breakdown?: {
+            academic: number;
+            budget: number;
+            location: number;
+            career: number;
+            lifestyle: number;
+          } | null;
+          tags?: string[] | null;
+          rationale?: string | null;
+          tuition_band?: number | null;
+          living_cost_band?: number | null;
+          employability_score?: number | null;
+          international_support_score?: number | null;
+          scholarship_signal?: 'high' | 'medium' | 'low' | 'none' | null;
+          hero_image_url?: string | null;
         };
         Update: {
           id?: string;
@@ -109,6 +145,24 @@ export type Database = {
           website?: string | null;
           is_russell_group?: boolean | null;
           created_at?: string;
+          latitude?: number | null;
+          longitude?: number | null;
+          fit_score?: number | null;
+          fit_breakdown?: {
+            academic: number;
+            budget: number;
+            location: number;
+            career: number;
+            lifestyle: number;
+          } | null;
+          tags?: string[] | null;
+          rationale?: string | null;
+          tuition_band?: number | null;
+          living_cost_band?: number | null;
+          employability_score?: number | null;
+          international_support_score?: number | null;
+          scholarship_signal?: 'high' | 'medium' | 'low' | 'none' | null;
+          hero_image_url?: string | null;
         };
       };
       programs: {

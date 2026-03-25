@@ -9,7 +9,6 @@ import { DashboardShell } from '@/components/dashboard/DashboardShell';
 import { RecommendationCarousel } from '@/components/dashboard/RecommendationCarousel';
 import { UKIntelligenceMap } from '@/components/dashboard/UKIntelligenceMap';
 import { UniversityIntelligencePanel } from '@/components/dashboard/UniversityIntelligencePanel';
-import { universityIntelligenceData } from '@/data/university-mock';
 import type { UniversityWithCoordsAndIntelligence } from '@/types';
 import { Loader2, Radar, Info } from 'lucide-react';
 
@@ -32,22 +31,29 @@ function DashboardContent() {
       const { data, error } = await supabase
         .from('universities')
         .select('*')
-        .order('ranking_uk', { ascending: true });
+        .order('fit_score', { ascending: false })
+        .limit(20);
 
       if (!error && data) {
-        const universitiesWithIntelligence: UniversityWithCoordsAndIntelligence[] = data.map((uni) => ({
-          ...uni,
-          latitude: null,
-          longitude: null,
-          intelligence: universityIntelligenceData[uni.slug] || null,
-        }));
+        const universitiesWithIntelligence: UniversityWithCoordsAndIntelligence[] = data
+          .filter((uni) => uni.fit_score !== null)
+          .map((uni) => ({
+            ...uni,
+            intelligence: uni.fit_score !== null ? {
+              fitScore: uni.fit_score,
+              fitBreakdown: uni.fit_breakdown || { academic: 0, budget: 0, location: 0, career: 0, lifestyle: 0 },
+              tags: uni.tags || [],
+              rationale: uni.rationale || '',
+              tuitionBand: (uni.tuition_band || 2) as 1 | 2 | 3 | 4,
+              livingCostBand: (uni.living_cost_band || 2) as 1 | 2 | 3 | 4,
+              employabilityScore: uni.employability_score || 0,
+              internationalSupportScore: uni.international_support_score || 0,
+              scholarshipSignal: uni.scholarship_signal || 'medium',
+              heroImageUrl: uni.hero_image_url,
+            } : null,
+          }));
 
-        const topUniversities = universitiesWithIntelligence
-          .filter((uni) => uni.intelligence)
-          .sort((a, b) => (b.intelligence?.fitScore || 0) - (a.intelligence?.fitScore || 0))
-          .slice(0, 15);
-
-        setUniversities(topUniversities);
+        setUniversities(universitiesWithIntelligence);
       }
       setLoading(false);
     }
@@ -91,7 +97,7 @@ function DashboardContent() {
         <RecommendationCarousel universities={universities} />
 
         <div className="flex-1 grid grid-cols-1 lg:grid-cols-3 gap-6 mt-6 min-h-0">
-          <div className="lg:col-span-2 min-h-[400px] lg:min-h-0">
+          <div className="lg:col-span-2 min-h-[400px] lg:min-h-[500px]">
             {loading ? (
               <div className="h-full flex items-center justify-center rounded-xl bg-[var(--intelligence-surface)] intelligence-border-glow">
                 <Loader2 className="h-8 w-8 animate-spin text-[var(--intelligence-glow)]" />
