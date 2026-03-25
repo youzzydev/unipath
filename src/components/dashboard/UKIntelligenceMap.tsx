@@ -5,7 +5,7 @@ import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { useUniversity } from '@/context/university-context';
 import type { UniversityWithCoordsAndIntelligence } from '@/types';
-import { Crosshair, ZoomIn, ZoomOut, RotateCcw } from 'lucide-react';
+import { Crosshair, ZoomIn, ZoomOut, RotateCcw, Box } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 interface UKIntelligenceMapProps {
@@ -19,6 +19,7 @@ export function UKIntelligenceMap({ universities }: UKIntelligenceMapProps) {
   const [mapLoaded, setMapLoaded] = useState(false);
   const [mapError, setMapError] = useState<string | null>(null);
   const [mounted, setMounted] = useState(false);
+  const [is3DMode, setIs3DMode] = useState(true);
   const { selectedUniversity, setSelectedUniversity, hoveredUniversity, setHoveredUniversity } = useUniversity();
 
   useEffect(() => {
@@ -61,13 +62,51 @@ export function UKIntelligenceMap({ universities }: UKIntelligenceMapProps) {
 
       map.current.on('load', () => {
         setMapLoaded(true);
-        if (map.current) {
-          map.current.setFog({
-            color: 'rgb(10, 15, 26)',
-            'high-color': 'rgb(17, 24, 39)',
-            'horizon-blend': 0.02,
-          });
-        }
+        
+        if (!map.current) return;
+        
+        // Add 3D terrain
+        map.current.addSource('mapbox-dem', {
+          type: 'raster-dem',
+          url: 'mapbox://mapbox.mapbox-terrain-dem-v1',
+          tileSize: 512,
+          maxzoom: 14,
+        });
+        
+        map.current.setTerrain({ source: 'mapbox-dem', exaggeration: 1.5 });
+        
+        // Add 3D building layer
+        const layers = map.current.getStyle().layers;
+        const labelLayerId = layers?.find(
+          (layer) => layer.type === 'symbol' && layer.layout?.['text-field']
+        )?.id;
+        
+        map.current.addLayer(
+          {
+            id: '3d-buildings',
+            source: 'composite',
+            'source-layer': 'building',
+            filter: ['==', 'extrude', 'true'],
+            type: 'fill-extrusion',
+            minzoom: 12,
+            paint: {
+              'fill-extrusion-color': '#1a1f2e',
+              'fill-extrusion-height': ['get', 'height'],
+              'fill-extrusion-base': ['get', 'min_height'],
+              'fill-extrusion-opacity': 0.8,
+            },
+          },
+          labelLayerId
+        );
+        
+        // Set atmospheric fog for depth
+        map.current.setFog({
+          color: 'rgb(10, 15, 26)',
+          'high-color': 'rgb(17, 24, 39)',
+          'horizon-blend': 0.02,
+          'space-color': '#050810',
+          'star-intensity': 0.15,
+        });
       });
 
       map.current.on('error', (e) => {
@@ -133,11 +172,15 @@ export function UKIntelligenceMap({ universities }: UKIntelligenceMapProps) {
     if (!mapLoaded || !map.current || !selectedUniversity) return;
 
     if (selectedUniversity.latitude && selectedUniversity.longitude) {
+      // 3D fly-to animation with pitch and bearing
       map.current.flyTo({
         center: [selectedUniversity.longitude, selectedUniversity.latitude],
-        zoom: 7,
-        duration: 1500,
+        zoom: 13,
+        pitch: 60,
+        bearing: Math.random() * 30 - 15, // Slight random rotation for dynamic feel
+        duration: 2000,
         essential: true,
+        curve: 1.2,
       });
     }
   }, [mapLoaded, selectedUniversity]);
@@ -145,9 +188,24 @@ export function UKIntelligenceMap({ universities }: UKIntelligenceMapProps) {
   const handleZoom = (direction: 'in' | 'out') => {
     if (!map.current) return;
     const currentZoom = map.current.getZoom();
+    const currentPitch = map.current.getPitch();
+    
     map.current.flyTo({
       zoom: direction === 'in' ? currentZoom + 1 : currentZoom - 1,
-      duration: 300,
+      pitch: direction === 'in' ? Math.min(currentPitch + 10, 75) : Math.max(currentPitch - 10, 0),
+      duration: 400,
+    });
+  };
+
+  const handleToggle3D = () => {
+    if (!map.current) return;
+    const new3DMode = !is3DMode;
+    setIs3DMode(new3DMode);
+    
+    const currentPitch = map.current.getPitch();
+    map.current.flyTo({
+      pitch: new3DMode ? 60 : 0,
+      duration: 800,
     });
   };
 
@@ -156,7 +214,9 @@ export function UKIntelligenceMap({ universities }: UKIntelligenceMapProps) {
     map.current.flyTo({
       center: [-2.0, 54.0],
       zoom: 5,
-      duration: 1000,
+      pitch: is3DMode ? 45 : 0,
+      bearing: 0,
+      duration: 1500,
     });
   };
 
@@ -199,6 +259,18 @@ export function UKIntelligenceMap({ universities }: UKIntelligenceMapProps) {
           className="h-10 w-10 rounded-lg bg-[var(--intelligence-surface)]/90 border border-[var(--intelligence-border)] backdrop-blur-sm hover:bg-[var(--intelligence-surface)]"
         >
           <ZoomOut className="h-4 w-4 text-white" />
+        </Button>
+        <Button
+          variant="secondary"
+          size="icon"
+          onClick={handleToggle3D}
+          className={is3DMode 
+            ? "h-10 w-10 rounded-lg bg-[var(--intelligence-glow)]/20 border border-[var(--intelligence-glow)] backdrop-blur-sm hover:bg-[var(--intelligence-glow)]/30" 
+            : "h-10 w-10 rounded-lg bg-[var(--intelligence-surface)]/90 border border-[var(--intelligence-border)] backdrop-blur-sm hover:bg-[var(--intelligence-surface)]"
+          }
+          title={is3DMode ? "Switch to 2D view" : "Switch to 3D view"}
+        >
+          <Box className={`h-4 w-4 ${is3DMode ? "text-[var(--intelligence-glow)]" : "text-white"}`} />
         </Button>
         <Button
           variant="secondary"
