@@ -80,9 +80,9 @@ function DashboardContent() {
   }
 
   return (
-    <div className="h-[calc(100vh-64px)] flex flex-col">
+    <div className="flex-1 flex flex-col min-h-0 overflow-hidden">
       <div className="container mx-auto px-4 py-6 flex-1 flex flex-col min-h-0">
-        <div className="mb-6">
+        <div className="mb-4 flex-shrink-0">
           <div className="flex items-center gap-3 mb-2">
             <div className="h-1 w-8 rounded-full bg-[var(--intelligence-glow)]" />
             <h1 className="text-2xl font-bold text-foreground">
@@ -96,8 +96,8 @@ function DashboardContent() {
 
         <RecommendationCarousel universities={universities} />
 
-        <div className="flex-1 grid grid-cols-1 lg:grid-cols-3 gap-6 mt-6 min-h-0">
-          <div className="lg:col-span-2 min-h-[400px] lg:min-h-[500px]">
+        <div className="flex-1 grid grid-cols-1 lg:grid-cols-3 gap-6 mt-4 min-h-0">
+          <div className="lg:col-span-2 h-full min-h-[300px]">
             {loading ? (
               <div className="h-full flex items-center justify-center rounded-xl bg-[var(--intelligence-surface)] intelligence-border-glow">
                 <Loader2 className="h-8 w-8 animate-spin text-[var(--intelligence-glow)]" />
@@ -107,8 +107,8 @@ function DashboardContent() {
             )}
           </div>
 
-          <div className="lg:col-span-1 min-h-[500px] lg:min-h-0 rounded-xl bg-[var(--intelligence-surface)] intelligence-border-glow overflow-hidden">
-            <div className="p-4 border-b border-[var(--intelligence-border)] bg-[var(--intelligence-bg)]">
+          <div className="lg:col-span-1 h-full min-h-[300px] rounded-xl bg-[var(--intelligence-surface)] intelligence-border-glow overflow-hidden flex flex-col">
+            <div className="p-4 border-b border-[var(--intelligence-border)] bg-[var(--intelligence-bg)] flex-shrink-0">
               <div className="flex items-center gap-2">
                 <Info className="h-4 w-4 text-[var(--intelligence-glow)]" />
                 <h2 className="text-sm font-semibold text-white uppercase tracking-wider">
@@ -116,7 +116,9 @@ function DashboardContent() {
                 </h2>
               </div>
             </div>
-            <UniversityIntelligencePanel />
+            <div className="flex-1 min-h-0 overflow-hidden">
+              <UniversityIntelligencePanel />
+            </div>
           </div>
         </div>
 

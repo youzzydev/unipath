@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState, useCallback } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { useUniversity } from '@/context/university-context';
@@ -18,37 +18,37 @@ export function UKIntelligenceMap({ universities }: UKIntelligenceMapProps) {
   const markersRef = useRef<mapboxgl.Marker[]>([]);
   const [mapLoaded, setMapLoaded] = useState(false);
   const [mapError, setMapError] = useState<string | null>(null);
+  const [mounted, setMounted] = useState(false);
   const { selectedUniversity, setSelectedUniversity, hoveredUniversity, setHoveredUniversity } = useUniversity();
 
-  const initializeMap = useCallback(async () => {
-    if (!mapContainer.current) {
-      console.log('Map container ref not available');
-      return;
-    }
-    if (map.current) {
-      console.log('Map already initialized');
-      return;
-    }
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (!mounted) return;
+    if (!mapContainer.current) return;
+    if (map.current) return;
 
     const token = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
-    console.log('Mapbox token available:', !!token);
-    console.log('Map container dimensions:', mapContainer.current.offsetWidth, mapContainer.current.offsetHeight);
-    console.log('Map container ref:', mapContainer.current);
-    
     if (!token) {
-      setMapError('Mapbox token not configured. Add NEXT_PUBLIC_MAPBOX_TOKEN to .env.local');
+      setMapError('Mapbox token not configured');
       return;
     }
 
-    try {
-      mapboxgl.accessToken = token;
-      console.log('Creating map...');
+    mapboxgl.accessToken = token;
+
+    const initMap = () => {
+      if (!mapContainer.current) return;
       
-      if (mapContainer.current.offsetWidth === 0 || mapContainer.current.offsetHeight === 0) {
-        console.log('Warning: Container has zero dimensions, waiting...');
-        await new Promise(resolve => setTimeout(resolve, 500));
+      const width = mapContainer.current.offsetWidth;
+      const height = mapContainer.current.offsetHeight;
+      
+      if (width === 0 || height === 0) {
+        setTimeout(initMap, 100);
+        return;
       }
-      
+
       map.current = new mapboxgl.Map({
         container: mapContainer.current,
         style: 'mapbox://styles/mapbox/dark-v11',
@@ -58,15 +58,9 @@ export function UKIntelligenceMap({ universities }: UKIntelligenceMapProps) {
         maxZoom: 12,
         attributionControl: false,
       });
-      console.log('Map object created, container:', mapContainer.current);
-
-      map.current.addControl(new mapboxgl.AttributionControl({ compact: true }), 'bottom-right');
 
       map.current.on('load', () => {
-        console.log('Map loaded successfully');
         setMapLoaded(true);
-        setMapError(null);
-        
         if (map.current) {
           map.current.setFog({
             color: 'rgb(10, 15, 26)',
@@ -80,14 +74,9 @@ export function UKIntelligenceMap({ universities }: UKIntelligenceMapProps) {
         console.error('Map error:', e);
         setMapError('Map failed to load');
       });
-    } catch (error) {
-      console.error('Map initialization error:', error);
-      setMapError('Failed to initialize map');
-    }
-  }, []);
+    };
 
-  useEffect(() => {
-    initializeMap();
+    initMap();
 
     return () => {
       if (map.current) {
@@ -95,7 +84,7 @@ export function UKIntelligenceMap({ universities }: UKIntelligenceMapProps) {
         map.current = null;
       }
     };
-  }, [initializeMap]);
+  }, [mounted]);
 
   useEffect(() => {
     if (!mapLoaded || !map.current) return;
@@ -173,7 +162,7 @@ export function UKIntelligenceMap({ universities }: UKIntelligenceMapProps) {
 
   if (mapError) {
     return (
-      <div className="relative w-full h-full min-h-[400px] rounded-xl overflow-hidden bg-[var(--intelligence-surface)] intelligence-border-glow">
+      <div className="relative w-full h-full min-h-[300px] rounded-xl overflow-hidden bg-[var(--intelligence-surface)] intelligence-border-glow">
         <div className="absolute inset-0 intelligence-grid-bg opacity-30" />
         <div className="flex flex-col items-center justify-center h-full gap-4 text-slate-400 p-8 text-center">
           <Crosshair className="h-12 w-12 text-[var(--intelligence-glow)]/50" />
@@ -186,11 +175,10 @@ export function UKIntelligenceMap({ universities }: UKIntelligenceMapProps) {
   }
 
   return (
-    <div className="relative w-full h-full min-h-[400px] rounded-xl overflow-hidden border border-[var(--intelligence-border)]">
+    <div className="relative w-full h-full min-h-[300px] rounded-xl overflow-hidden border border-[var(--intelligence-border)]">
       <div 
         ref={mapContainer} 
-        className="absolute inset-0"
-        style={{ minHeight: '400px' }}
+        className="absolute inset-0 w-full h-full"
       />
 
       <div className="absolute inset-0 pointer-events-none intelligence-grid-bg opacity-20" />
