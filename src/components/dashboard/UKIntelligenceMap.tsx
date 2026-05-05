@@ -52,37 +52,42 @@ export function UKIntelligenceMap({ universities }: UKIntelligenceMapProps) {
 
       map.current = new mapboxgl.Map({
         container: mapContainer.current,
-        style: 'mapbox://styles/mapbox/dark-v11',
+        style: 'mapbox://styles/mapbox/navigation-night-v1',
         center: [-2.0, 54.0],
         zoom: 5,
         minZoom: 4,
-        maxZoom: 12,
+        maxZoom: 18,
         attributionControl: false,
       });
 
       map.current.on('load', () => {
+        console.log('Map loaded, setting up 3D layers...');
         setMapLoaded(true);
         
         if (!map.current) return;
         
         // Add 3D terrain
-        map.current.addSource('mapbox-dem', {
-          type: 'raster-dem',
-          url: 'mapbox://mapbox.mapbox-terrain-dem-v1',
-          tileSize: 512,
-          maxzoom: 14,
-        });
+        try {
+          map.current.addSource('mapbox-dem', {
+            type: 'raster-dem',
+            url: 'mapbox://mapbox.mapbox-terrain-dem-v1',
+            tileSize: 512,
+            maxzoom: 14,
+          });
+          map.current.setTerrain({ source: 'mapbox-dem', exaggeration: 1.5 });
+          console.log('Terrain added');
+        } catch (err) {
+          console.error('Error adding terrain:', err);
+        }
         
-        map.current.setTerrain({ source: 'mapbox-dem', exaggeration: 1.5 });
-        
-        // Add 3D building layer
-        const layers = map.current.getStyle().layers;
-        const labelLayerId = layers?.find(
-          (layer) => layer.type === 'symbol' && layer.layout?.['text-field']
-        )?.id;
-        
-        map.current.addLayer(
-          {
+        // Add 3D buildings
+        try {
+          const layers = map.current.getStyle().layers;
+          const labelLayerId = layers?.find(
+            (layer) => layer.type === 'symbol' && layer.layout?.['text-field']
+          )?.id;
+          
+          map.current.addLayer({
             id: '3d-buildings',
             source: 'composite',
             'source-layer': 'building',
@@ -90,23 +95,27 @@ export function UKIntelligenceMap({ universities }: UKIntelligenceMapProps) {
             type: 'fill-extrusion',
             minzoom: 12,
             paint: {
-              'fill-extrusion-color': '#1a1f2e',
+              'fill-extrusion-color': '#475569',
               'fill-extrusion-height': ['get', 'height'],
               'fill-extrusion-base': ['get', 'min_height'],
               'fill-extrusion-opacity': 0.8,
             },
-          },
-          labelLayerId
-        );
+          }, labelLayerId);
+          console.log('3D buildings added');
+        } catch (err) {
+          console.error('Error adding 3D buildings:', err);
+        }
         
-        // Set atmospheric fog for depth
+        // Set atmospheric fog for cinematic feel
         map.current.setFog({
           color: 'rgb(10, 15, 26)',
           'high-color': 'rgb(17, 24, 39)',
-          'horizon-blend': 0.02,
+          'horizon-blend': 0.05,
           'space-color': '#050810',
-          'star-intensity': 0.15,
+          'star-intensity': 0.2,
         });
+        
+        console.log('All layers initialized');
       });
 
       map.current.on('error', (e) => {
@@ -172,13 +181,12 @@ export function UKIntelligenceMap({ universities }: UKIntelligenceMapProps) {
     if (!mapLoaded || !map.current || !selectedUniversity) return;
 
     if (selectedUniversity.latitude && selectedUniversity.longitude) {
-      // 3D fly-to animation with pitch and bearing
       map.current.flyTo({
         center: [selectedUniversity.longitude, selectedUniversity.latitude],
-        zoom: 13,
-        pitch: 60,
-        bearing: Math.random() * 30 - 15, // Slight random rotation for dynamic feel
-        duration: 2000,
+        zoom: 14,
+        pitch: 55,
+        bearing: Math.random() * 30 - 15,
+        duration: 2500,
         essential: true,
         curve: 1.2,
       });
@@ -202,7 +210,6 @@ export function UKIntelligenceMap({ universities }: UKIntelligenceMapProps) {
     const new3DMode = !is3DMode;
     setIs3DMode(new3DMode);
     
-    const currentPitch = map.current.getPitch();
     map.current.flyTo({
       pitch: new3DMode ? 60 : 0,
       duration: 800,
